@@ -2,6 +2,7 @@ $(function () {
     var layer = layui.layer
     var form = layui.form
     initCate()
+    $('.amend').hide()
 
     // 初始化用户的基本信息
     var baseUrl = 'http://www.liulongbin.top:3007'
@@ -19,7 +20,7 @@ $(function () {
                 }
                 // 调用 form.val() 快速为表单赋值
                 form.val('formAmendInfo', res.data)
-                console.log(res.data.content);
+                // console.log(res.data.content);
                 $image
                     .cropper('destroy')      // 销毁旧的裁剪区域
                     .attr('src',baseUrl+ res.data.cover_img)  // 重新设置图片路径
@@ -76,12 +77,12 @@ $(function () {
         if (files.lenght === 0) {
             return
         }
-        // var newImgURL = URL.createObjectURL(files[0])
-        // console.log(newImgURL);
-        // $image
-        //     .cropper('destroy')      // 销毁旧的裁剪区域
-        //     .attr('src', newImgURL)  // 重新设置图片路径
-        //     .cropper(options)        // 重新初始化裁剪区域
+        var newImgURL = URL.createObjectURL(files[0])
+        console.log(newImgURL);
+        $image
+            .cropper('destroy')      // 销毁旧的裁剪区域
+            .attr('src', newImgURL)  // 重新设置图片路径
+            .cropper(options)        // 重新初始化裁剪区域
     })
 
     var art_state = '已发布'
@@ -98,6 +99,8 @@ $(function () {
         // 将文章的发布状态存到fd中
         fd.append('state', art_state)
         // console.log(fd);
+        console.log(fd);
+
 
         // 将裁剪过后的图片输出为一个文件对象
 

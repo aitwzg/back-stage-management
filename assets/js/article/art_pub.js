@@ -65,7 +65,7 @@ $(function () {
         var fd = new FormData($(this)[0])
         // 将文章的发布状态存到fd中
         fd.append('state', art_state)
-        // console.log(fd);
+        console.log(fd);
 
         // 将裁剪过后的图片输出为一个文件对象
 
