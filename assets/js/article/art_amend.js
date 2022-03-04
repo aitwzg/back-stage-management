@@ -10,7 +10,7 @@ $(function () {
     $('tbody').on('click', '.btn-amend', function () {
         $('.amend').show()
         $('.list').hide()
-        id =$(this).attr('data-id')
+        id = $(this).attr('data-id')
         $.ajax({
             method: 'GET',
             url: '/my/article/' + id,
@@ -23,11 +23,20 @@ $(function () {
                 // console.log(res.data.content);
                 $image
                     .cropper('destroy')      // 销毁旧的裁剪区域
-                    .attr('src',baseUrl+ res.data.cover_img)  // 重新设置图片路径
+                    .attr('src', baseUrl + res.data.cover_img)  // 重新设置图片路径
                     .cropper(options)        // 重新初始化裁剪区域
-                    // $('#tinymce').html(res.data.content)
+                // $('#tinymce').html(res.data.content)
+                // var ifr = document.getElementById("content_ifr");
+                // var tinymce = ifr.contentWindow.document.getElementById('tinymce')
+                // console.log(ifr);
+                // console.log(tinymce);
+                // tinymce.innerHTML=res.data.content
+                $("#content_ifr").contents().find("#tinymce").html(res.data.content)
+                // console.log($("#content_ifr").contents().find("#tinymce"));
             }
         })
+
+
     })
 
     function initCate() {
@@ -46,11 +55,8 @@ $(function () {
     }
     // 初始化富文本编辑器
     initEditor()
-    // console.log(window.frames["#contente_ifr"].document.querySelector('#tinymce')); 
-    // console.log($("#contente_ifr"));
 
 
-    
 
 
     // 1. 初始化图片裁剪器
@@ -112,7 +118,7 @@ $(function () {
             .toBlob(function (blob) {       // 将 Canvas 画布上的内容，转化为文件对象
                 // 得到文件对象后，进行后续的操作
                 fd.append('cover_img', blob)
-                fd.append('id',id)
+                fd.append('id', id)
                 publishArticle(fd)
 
             })
